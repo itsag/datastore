@@ -1,0 +1,23 @@
+{
+  "name": "datastore",
+  "description": "data caching for javascript apps",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Ajay Gupta",
+    "email": "ajay.gupta8308@gmail.com",
+    "url": "https://github.com/itsag"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsag/datastore.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.0.6",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1"
+  }
+}
