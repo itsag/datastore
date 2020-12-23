@@ -1,58 +1,74 @@
+// Modules
 const _ = require("lodash");
 
+// Create Store
 const createStore = () => {
-  // Container
-  let state;
+  // @container
+  // Stores all the data of the store
+  let container;
 
-  // Dispatch
+  // ------------------
+  // @dispatch
+  // Makes changes to the container
+  // ------------------
   const dispatch = action => {
-    // Update state
-    state = {
-      ...state,
+    if (!_.isObject(action)) {
+      return action;
+    }
+
+    if (_.isEmpty(action)) {
+      return action;
+    }
+
+    if (_.isNil(action.key) || _.isEmpty(action.key)) {
+      return action;
+    }
+
+    container = {
+      ...container,
       [action.key]: action.value
     };
 
-    return state;
+    return action;
   };
 
-  // Get
+  // ------------------
+  // @get
+  // Get a single value from state or the whole state
+  // ------------------
   const get = key => {
-    if (state[key]) {
-      return state[key];
+    if (container[key]) {
+      return container[key];
     }
 
-    const result = { ...state };
+    const object = { ...container };
 
-    for (const key in state) {
-      if (_.isUndefined(state[key])) {
-        delete result[key];
+    for (const k in container) {
+      if (_.isUndefined(container[k])) {
+        delete object[k];
       }
     }
 
-    return result;
+    return object;
   };
 
-  // Update
+  // ------------------
+  // @update
+  // Adds the passed key-value to the store
+  // ------------------
   const update = (key, value) => {
     return dispatch({ key, value });
   };
 
-  // Remove
+  // ------------------
+  // @remove
+  // Removes the passed key's value from the store
+  // ------------------
   const remove = key => {
     return dispatch({ key });
   };
 
-  // Reset
-  const reset = () => {
-    state = {};
-  };
-
-  return {
-    get,
-    update,
-    remove,
-    reset
-  };
+  return { get, update, remove };
 };
 
 // Exports
